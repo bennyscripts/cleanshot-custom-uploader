@@ -14,6 +14,7 @@ def main():
         os.makedirs(os.path.join(SCREENSHOT_DIR_PATH, "Screenshots"))
         print("Make sure to set your Cleanshot export directory to: " + SCREENSHOT_DIR_PATH)
 
+    print("✅ Uploader started in the background.")
     screenshot_dir = os.path.join(SCREENSHOT_DIR_PATH, "Screenshots")
     stored_files = os.listdir(screenshot_dir)
 
