@@ -16,7 +16,9 @@ class Uploader:
     def check_files(self):
         for _file in os.listdir(f"data/"):
             if _file.endswith(".sxcu"):
+                print(f"📁 Found SXCU uploader file.")
                 os.rename(f"data/{_file}", f"data/uploader.json")
+                print(f"🏷️  Renamed uploader file to uploader.json")
                 break
 
         if not os.path.isfile(f"data/uploader.json"):
