@@ -1,1 +1,6 @@
 data/uploader.json
+__pycache__/*
+*/__pycache__/*
+utils/__pycache__/*
+*.pyc
+.DS_Store
