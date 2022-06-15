@@ -2,5 +2,5 @@ import os
 
 def get_newest_file(path):
     files = os.listdir(path)
-    paths = [os.path.join(path, basename) for basename in files]
-    return max(paths, key=os.path.getctime)
+    files.sort(key=lambda x: os.path.getmtime(os.path.join(path, x)))
+    return os.path.join(path, files[-1])
