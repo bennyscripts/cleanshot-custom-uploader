@@ -14,6 +14,12 @@ if not os.path.isfile(f"data/uploader.json"):
 
 UPLOADER_JSON = json.load(open("data/uploader.json"))
 
+if "Headers" not in UPLOADER_JSON:
+    UPLOADER_JSON["Headers"] = {}
+
+if "Arguments" not in UPLOADER_JSON:
+    UPLOADER_JSON["Arguments"] = {}
+
 def upload_screenshot(screenshot_path):
     print("Uploading screenshot...") 
     content_type = UPLOADER_JSON["Body"]
