@@ -10,6 +10,10 @@ SCREENSHOT_DIR_PATH = f"{os.path.expanduser('~')}/Pictures"
 def main():
     notifier.send("File Uploader", "Uploader started in the background.\nTake a screenshot and a URL will be copied.")
 
+    if not os.path.exists(os.path.join(SCREENSHOT_DIR_PATH, "Screenshots")):
+        os.makedirs(os.path.join(SCREENSHOT_DIR_PATH, "Screenshots"))
+        print("Make sure to set your Cleanshot export directory to: " + SCREENSHOT_DIR_PATH)
+
     screenshot_dir = os.path.join(SCREENSHOT_DIR_PATH, "Screenshots")
     stored_files = os.listdir(screenshot_dir)
 
