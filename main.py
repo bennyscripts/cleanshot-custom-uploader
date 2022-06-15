@@ -8,14 +8,13 @@ from utils import files
 SCREENSHOT_DIR_PATH = f"{os.path.expanduser('~')}/Pictures"
 
 def main():
-    notifier.send("File Uploader", "Uploader started in the background.\nTake a screenshot and a URL will be copied.")
-
     if not os.path.exists(os.path.join(SCREENSHOT_DIR_PATH, "Screenshots")):
         os.makedirs(os.path.join(SCREENSHOT_DIR_PATH, "Screenshots"))
         print("Make sure to set your Cleanshot export directory to: " + SCREENSHOT_DIR_PATH)
 
     notifier.send("File Uploader", "Uploader started in the background.")
     print("✅ Uploader started in the background.")
+
     screenshot_dir = os.path.join(SCREENSHOT_DIR_PATH, "Screenshots")
     stored_files = os.listdir(screenshot_dir)
 
@@ -28,7 +27,7 @@ def main():
             pyperclip.copy(url)
             stored_files.append(newest_file_no_path)
 
-            print(f"Copied to clipboard: {url}")
+            print(f"✅ Copied to clipboard: {url}")
             notifier.send("File Uploader", "Screenshot copied to clipboard")
 
 if __name__ == "__main__":
