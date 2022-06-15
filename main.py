@@ -6,6 +6,7 @@ from utils import uploader
 from utils import files
 
 SCREENSHOT_DIR_PATH = f"{os.path.expanduser('~')}/Pictures"
+UPLOADER = uploader.Uploader()
 
 def main():
     if not os.path.exists(os.path.join(SCREENSHOT_DIR_PATH, "Screenshots")):
@@ -23,7 +24,7 @@ def main():
         newest_file_no_path = newest_file.split("/")[-1]
 
         if newest_file_no_path not in stored_files:
-            url = uploader.upload_screenshot(newest_file)
+            url = UPLOADER.upload_screenshot(newest_file)
             pyperclip.copy(url)
             stored_files.append(newest_file_no_path)
 
