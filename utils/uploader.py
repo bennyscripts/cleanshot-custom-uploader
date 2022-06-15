@@ -20,12 +20,12 @@ class Uploader:
                 break
 
         if not os.path.isfile(f"data/uploader.json"):
-            print("No uploader.json file found in data folder.")
-            print("Please create a file called uploader.json in the data folder or put a ShareX config file in the data folder")
+            print("❎ No uploader.json file found in data folder.")
+            print("🙏 Please create a file called uploader.json in the data folder or put a ShareX config file in the data folder")
             exit(1)
 
     def upload_screenshot(self, screenshot_path):
-        print("Uploading screenshot...") 
+        print("🔁 Uploading screenshot...") 
         content_type = self.uploader_json["Body"]
 
         if content_type == "MultipartFormData":
