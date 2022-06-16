@@ -6,7 +6,7 @@ from utils import notifier
 from utils import uploader
 from utils import files
 
-async def main():
+async def main() -> None:
     SCREENSHOT_DIR_PATH = f"{os.path.expanduser('~')}/Pictures"
     UPLOADER = uploader.Uploader()
 

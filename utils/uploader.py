@@ -2,8 +2,10 @@ import os
 import requests
 import json
 
+from typing import Union
+
 class Uploader:
-    def __init__(self):
+    def __init__(self) -> None:
         self.check_files()
         self.uploader_json = json.load(open("data/uploader.json"))
         self.http = requests.Session()
@@ -14,7 +16,7 @@ class Uploader:
         if "Arguments" not in self.uploader_json:
             self.uploader_json["Arguments"] = {}
 
-    def check_files(self):
+    def check_files(self) -> None:
         for _file in os.listdir(f"data/"):
             if _file.endswith(".sxcu"):
                 print(f"📁 Found SXCU uploader file.")
@@ -27,7 +29,7 @@ class Uploader:
             print("🙏 Please create a file called uploader.json in the data folder or put a ShareX config file in the data folder")
             exit(1)
 
-    async def upload_screenshot(self, screenshot_path):
+    async def upload_screenshot(self, screenshot_path: str) -> Union[str, None]:
         print("🔁 Uploading screenshot...") 
         content_type = self.uploader_json["Body"]
 
