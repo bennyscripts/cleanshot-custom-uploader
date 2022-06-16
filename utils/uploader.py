@@ -27,7 +27,7 @@ class Uploader:
             print("🙏 Please create a file called uploader.json in the data folder or put a ShareX config file in the data folder")
             exit(1)
 
-    def upload_screenshot(self, screenshot_path):
+    async def upload_screenshot(self, screenshot_path):
         print("🔁 Uploading screenshot...") 
         content_type = self.uploader_json["Body"]
 

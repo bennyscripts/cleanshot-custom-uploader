@@ -1,14 +1,15 @@
 import os
 import pyperclip
+import asyncio
 
 from utils import notifier
 from utils import uploader
 from utils import files
 
-SCREENSHOT_DIR_PATH = f"{os.path.expanduser('~')}/Pictures"
-UPLOADER = uploader.Uploader()
+async def main():
+    SCREENSHOT_DIR_PATH = f"{os.path.expanduser('~')}/Pictures"
+    UPLOADER = uploader.Uploader()
 
-def main():
     if not os.path.exists(os.path.join(SCREENSHOT_DIR_PATH, "Screenshots")):
         os.makedirs(os.path.join(SCREENSHOT_DIR_PATH, "Screenshots"))
         print("Make sure to set your Cleanshot export directory to: " + SCREENSHOT_DIR_PATH)
@@ -20,11 +21,11 @@ def main():
     stored_files = os.listdir(screenshot_dir)
 
     while True:
-        newest_file = files.get_newest_file(screenshot_dir)
+        newest_file = await files.get_newest_file(screenshot_dir)
         newest_file_no_path = newest_file.split("/")[-1]
 
         if newest_file_no_path not in stored_files:
-            url = UPLOADER.upload_screenshot(newest_file)
+            url = await UPLOADER.upload_screenshot(newest_file)
             pyperclip.copy(url)
             stored_files.append(newest_file_no_path)
 
@@ -32,4 +33,5 @@ def main():
             notifier.send("File Uploader", "Screenshot copied to clipboard")
 
 if __name__ == "__main__":
-    main()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
