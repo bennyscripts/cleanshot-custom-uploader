@@ -6,6 +6,7 @@ class Uploader:
     def __init__(self):
         self.check_files()
         self.uploader_json = json.load(open("data/uploader.json"))
+        self.http = requests.Session()
 
         if "Headers" not in self.uploader_json:
             self.uploader_json["Headers"] = {}
@@ -33,7 +34,7 @@ class Uploader:
         if content_type == "MultipartFormData":
             files = {self.uploader_json["FileFormName"]: open(screenshot_path, 'rb')}
             arguments = self.uploader_json["Arguments"]
-            response = requests.request(self.uploader_json["RequestMethod"], self.uploader_json["RequestURL"], files=files, data=arguments, headers=self.uploader_json["Headers"])
+            response = self.http.request(self.uploader_json["RequestMethod"], self.uploader_json["RequestURL"], files=files, data=arguments, headers=self.uploader_json["Headers"])
             
         if response.status_code == 200:
             url = response.text
