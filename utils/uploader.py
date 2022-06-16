@@ -39,7 +39,16 @@ class Uploader:
             response = self.http.request(self.uploader_json["RequestMethod"], self.uploader_json["RequestURL"], files=files, data=arguments, headers=self.uploader_json["Headers"])
             
         if response.status_code == 200:
-            url = response.text
-            return url
+            if response.headers["Content-Type"].startswith("application/json"):
+                response_json = response.json()
+                if "URL" in self.uploader_json:
+                    uploader_url = self.uploader_json["URL"].replace("$", "")
+                    json_key = uploader_url.split(":")[1]
+
+                    if json_key in response_json:
+                        return response_json[json_key]
+
+            if response.headers["Content-Type"].startswith("text/plain"):
+                return response.text
 
         return None
