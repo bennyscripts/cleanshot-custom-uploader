@@ -21,11 +21,11 @@ async def main() -> None:
     stored_files = os.listdir(screenshot_dir)
 
     while True:
-        newest_file = await files.get_newest_file(screenshot_dir)
+        newest_file = files.get_newest_file(screenshot_dir)
         newest_file_no_path = newest_file.split("/")[-1]
 
         if newest_file_no_path not in stored_files:
-            url = await UPLOADER.upload_screenshot(newest_file)
+            url = UPLOADER.upload_screenshot(newest_file)
             pyperclip.copy(url)
             stored_files.append(newest_file_no_path)
 
