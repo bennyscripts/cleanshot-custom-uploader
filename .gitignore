@@ -4,3 +4,4 @@ __pycache__/*
 utils/__pycache__/*
 *.pyc
 .DS_Store
+compile.py
